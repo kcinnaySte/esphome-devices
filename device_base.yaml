@@ -1,0 +1,49 @@
+# Device for all ESP-Home devices in my home
+#
+# Needed Substitutions:
+# device_name -> Machine-frendly name of device
+# device_description -> Description for human in esphome dashboard
+# ota_password -> Password for ota updates
+# friendly_name -> Name of device in homeassistant
+
+
+logger:
+
+esphome:
+    name: ${device_name}
+    comment: ${device_description}
+
+
+ota:
+    password: ${ota_password}
+    id: my_ota
+
+
+time:
+    - platform: homeassistant
+      id: homeassistent_time
+      timezone: "Europe/Berlin"
+
+text_sensor:
+    - platform: wifi_info
+      ip_address:
+          name: ${friendly_name} IP Address
+      bssid:
+          name: ${friendly_name} BSSID
+    - platform: template
+      name: ${friendly_name} Uptime H
+      id: uptime_human
+      icon: mdi:clock-start
+      entity_category: diagnostic
+
+button:
+    - platform: restart
+      name: ${friendly_name} Restart
+    - platform: safe_mode
+      name: ${friendly_name} Restart Safe Mode
+
+sensor:
+
+    - platform: wifi_signal
+      name: ${friendly_name} WiFi Signal
+      update_interval: 60s
