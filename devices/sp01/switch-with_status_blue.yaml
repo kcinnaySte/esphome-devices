@@ -1,0 +1,36 @@
+# Binary sensor for the power button
+binary_sensor:
+  - platform: gpio
+    name: ${friendly_name} Power Button
+    id: button1
+    pin:
+      number: GPIO3
+      inverted: true
+    on_press:
+      - switch.toggle: power_switch
+
+switch:
+  # Switch to restart the plug
+  - platform: gpio
+    id: power_switch
+    pin: GPIO14
+    name: ${friendly_name} Power Switch
+    restore_mode: RESTORE_DEFAULT_OFF
+    on_turn_on:
+      - light.turn_on: led
+    on_turn_off:
+      - light.turn_off: led
+
+output:
+  # esphome state led
+  - platform: esp8266_pwm
+    id: state_led
+    pin:
+      number: GPIO1
+      inverted: true
+
+light:
+  # Power state light
+  - platform: monochromatic
+    output: state_led
+    id: led

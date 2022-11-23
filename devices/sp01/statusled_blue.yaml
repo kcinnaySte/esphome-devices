@@ -1,0 +1,5 @@
+## Uses the red LED as a status indicator
+status_led:
+  pin:
+    number: GPIO1
+    inverted: true
