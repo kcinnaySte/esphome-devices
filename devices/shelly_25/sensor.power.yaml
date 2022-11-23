@@ -1,0 +1,56 @@
+# Enable Power/Voltage/Current measurement for Shelly 2.5
+#
+# Needed Substitutions:
+# device_name -> Name of the Device
+# channel_1 -> Name of channel 1 for power and current name in HASS
+# channel_2 -> Name of channel 2 for power and current name in HASS
+# max_power -> Maximum power in watts to switch off the outputs (see neccessary scripts)
+#
+# Neccessary Scripts
+# The Script 'all_off' is neccessary to switch off all Outputs at over_current
+
+
+platform: ade7953
+irq_pin: GPIO16 # Prevent overheating by setting this
+voltage:
+  name: ${device_name} voltage
+# On the Shelly 2.5 channels are mixed ch1=B ch2=A
+current_a:
+  name: ${channel_2} current
+  internal: true
+current_b:
+  name: ${channel_1} current
+  internal: true
+active_power_a:
+  name: ${channel_2} power
+  id: power_channel_2
+  # active_power_a is normal, so don't multiply by -1
+  on_value_range:
+    - above: ${max_power}
+      then:
+        - script.execute: all_off
+          #- output.turn_off: shelly_25_relay_2
+        - homeassistant.service:
+            service: persistent_notification.create
+            data:
+              title: Message from ${device_name}
+            data_template:
+              message: Switch turned off because power exceeded ${max_power}W
+active_power_b:
+  name: ${channel_1} power
+  id: power_channel_1
+  # active_power_b is inverted, so multiply by -1
+  filters:
+    - multiply: -1
+  on_value_range:
+    - above: ${max_power}
+      then:
+          #- output.turn_off: shelly_25_relay_1
+        - script.execute: all_off
+        - homeassistant.service:
+            service: persistent_notification.create
+            data:
+              title: Message from ${device_name}
+            data_template:
+              message: Switch turned off because power exceeded ${max_power}W
+update_interval: 30s
