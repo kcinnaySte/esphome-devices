@@ -1,0 +1,19 @@
+light:
+  - platform: binary
+    name: "${channel_1}"
+    output: shelly_25_relay_1
+    id: lightid1
+
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: shelly_25_relay_1
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO13
+    name: "${channel_1} input"
+    on_state:
+      then:
+         - light.toggle: lightid1
