@@ -16,7 +16,7 @@ binary_sensor:
     on_press:
       - light.toggle: relay_switch
       
-switch:
+light:
   - platform: binary
     output: relay
     id: relay_switch
@@ -29,4 +29,4 @@ switch:
 script:
   - id: all_off
     then:
-      - switch.turn_off: relay_switch
+      - light.turn_off: relay_switch
