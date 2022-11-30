@@ -1,0 +1,11 @@
+#Get Daily Enerfy from Shelly
+#
+
+sensor:
+  - platform: total_daily_energy
+    name: ${channel_1} Energie
+    power_id: power_channel_1
+    filters:
+      # Multiplication factor from W to kW is 0.001
+      - multiply: 0.001
+    unit_of_measurement: kWh
