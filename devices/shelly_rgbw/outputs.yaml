@@ -1,0 +1,28 @@
+# All Outputs for Shelly RGBW
+#
+# Needed Subtitutions
+# max_power -> Maximum power (Amps) for each output
+output:
+  - platform: esp8266_pwm
+    pin: GPIO12
+    frequency: 1000 Hz
+    id: pwm_r
+    max_power: ${max_power}
+
+  - platform: esp8266_pwm
+    pin: GPIO15
+    frequency: 1000 Hz
+    id: pwm_g
+    max_power: ${max_power}
+
+  - platform: esp8266_pwm
+    pin: GPIO14
+    frequency: 1000 Hz
+    id: pwm_b
+    max_power: ${max_power}
+
+  - platform: esp8266_pwm
+    pin: GPIO4
+    frequency: 1000 Hz
+    id: pwm_w
+    max_power: ${max_power}
