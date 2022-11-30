@@ -1,0 +1,31 @@
+sensor:
+  # Gosund SP1 Config
+  # Power sensor
+  - platform: hlw8012
+    sel_pin:
+      number: GPIO12
+      inverted: true
+    cf_pin: GPIO04
+    cf1_pin: GPIO05
+    current_resistor: "0.00221"
+    voltage_divider: "871"
+    change_mode_every: 8
+    update_interval: 10s
+    # Current sensor
+    current:
+      id: current
+      name: ${friendly_name} Energy Current
+      unit_of_measurement: A
+      accuracy_decimals: 2
+    # Voltage sensor
+    voltage:
+      name: ${friendly_name} Energy Voltage
+      unit_of_measurement: V
+      accuracy_decimals: 1
+    # Power sensor
+    power:
+      id: power
+      name: ${friendly_name} Energy Power
+      unit_of_measurement: W
+      accuracy_decimals: 0
+
