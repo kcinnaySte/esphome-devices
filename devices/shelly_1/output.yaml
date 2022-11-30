@@ -1,0 +1,4 @@
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: shelly_relay

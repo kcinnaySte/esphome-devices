@@ -1,0 +1,4 @@
+# Main Device for Shelly 1
+esphome:
+  platform: ESP8266
+  board: esp01_1m

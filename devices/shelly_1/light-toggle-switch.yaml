@@ -1,0 +1,16 @@
+light:
+  - platform: binary
+    name: "${friendly_name}"
+    output: shelly_relay
+    id: lightid
+
+<< !include: output.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO5
+    name: "${friendly_name} input"
+    on_state:
+      then:
+        - light.toggle: lightid
