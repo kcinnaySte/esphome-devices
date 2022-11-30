@@ -1,0 +1,34 @@
+esphome:
+  platform: ESP8266
+  board: esp8285j
+
+sensor:
+  # NTC Temperature
+  - platform: ntc
+    sensor: temp_resistance_reading
+    name: ${friendly_name} temperature
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    icon: "mdi:thermometer"
+    calibration:
+      b_constant: 3350
+      reference_resistance: 10kOhm
+      reference_temperature: 298.15K
+    on_value_range:
+      - above: ${max_temp}
+        then:
+          - script.execute: all_off
+          - homeassistant.service:
+              service: persistent_notification.create
+              data:
+                title: Message from ${friendly_name}
+              data_template:
+                message: Switch turned off because temperature exceeded ${max_temp}°C
+  - platform: resistance
+    id: temp_resistance_reading
+    sensor: temp_analog_reading
+    configuration: DOWNSTREAM
+    resistor: 32kOhm
+  - platform: adc
+    id: temp_analog_reading
+    pin: A0

@@ -1,0 +1,36 @@
+sensor:
+  - platform: hlw8012
+    sel_pin:
+      number: GPIO12
+      inverted: true
+    cf_pin: GPIO05
+    cf1_pin: GPIO14
+    current_resistor: ${current_res}
+    voltage_divider: ${voltage_div}
+    current:
+      name: "${friendly_name} current"
+      internal: true
+      unit_of_measurement: "A"
+      accuracy_decimals: 3
+      icon: mdi:flash-outline
+    voltage:
+      name: "${friendly_name} voltage"
+      internal: true
+      unit_of_measurement: "V"
+      icon: mdi:flash-outline
+    power:
+      name: "${friendly_name} power"
+      id: power
+      unit_of_measurement: "W"
+      icon: mdi:flash-outline
+      on_value_range:
+        - above: ${max_power}
+          then:
+            - script.execute: all_off
+            - homeassistant.service:
+                service: persistent_notification.create
+                data:
+                  title: Message from ${friendly_name}
+                data_template:
+                  message: Switch turned off because power exceeded ${max_power}W
+    update_interval: 10s

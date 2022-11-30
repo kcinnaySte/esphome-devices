@@ -1,0 +1,28 @@
+output:
+  - platform: gpio
+    pin: GPIO00
+    inverted: true
+    id: led
+  - platform: gpio
+    pin: GPIO15
+    id: relay
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO13
+      inverted: True
+    name: "${friendly_name}_button"
+    on_press:
+      - light.toggle: relay_switch
+      
+light:
+  - platform: binary
+    output: relay
+    id: relay_switch
+    name: "${friendly_name}"
+    on_turn_on:
+      - output.turn_on: led
+    on_turn_off:
+      - output.turn_off: led
+      
