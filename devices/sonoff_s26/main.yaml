@@ -1,0 +1,4 @@
+# Main Device Sonnof S26
+esphome:
+  platform: ESP8266
+  board: esp01_1m
