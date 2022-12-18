@@ -43,8 +43,6 @@ button:
       name: ${friendly_name} Restart Safe Mode
 
 sensor:
-
-sensor:
     - platform: uptime
       name: ${friendly_name} Uptime
       disabled_by_default: true
