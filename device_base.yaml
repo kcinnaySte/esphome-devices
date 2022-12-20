@@ -21,7 +21,7 @@ ota:
 
 time:
     - platform: homeassistant
-      id: homeassistent_time
+      id: homeassistant_time
       timezone: "Europe/Berlin"
 
 text_sensor:
