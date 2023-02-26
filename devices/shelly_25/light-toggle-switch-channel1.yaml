@@ -11,9 +11,20 @@ output:
 
 binary_sensor:
   - platform: gpio
+    id: input_1
     pin:
       number: GPIO13
     name: "${channel_1} input"
     on_state:
       then:
          - light.toggle: lightid1
+    on_multi_click:
+      - timing:
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5
+          - OFF for at most 0.5s
+          - ON for at most 0.5
+          - OFF for at most 0.5s
+        then:
+          - logger.log: "RequestReboot"
