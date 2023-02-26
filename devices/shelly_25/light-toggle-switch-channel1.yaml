@@ -22,9 +22,9 @@ binary_sensor:
       - timing:
           - ON for at most 0.5s
           - OFF for at most 0.5s
-          - ON for at most 0.5
+          - ON for at most 0.5s
           - OFF for at most 0.5s
-          - ON for at most 0.5
+          - ON for at most 0.5s
           - OFF for at most 0.5s
         then:
           - logger.log: "RequestReboot"
