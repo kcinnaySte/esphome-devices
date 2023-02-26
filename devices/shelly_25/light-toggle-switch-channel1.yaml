@@ -27,4 +27,4 @@ binary_sensor:
           - ON for at most 0.5s
           - OFF for at most 0.5s
         then:
-          - logger.log: "RequestReboot"
+          - button.press: btn_restart

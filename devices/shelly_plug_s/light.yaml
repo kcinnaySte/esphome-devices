@@ -15,6 +15,16 @@ binary_sensor:
     name: "${friendly_name}_button"
     on_press:
       - light.toggle: relay_switch
+    on_multi_click:
+      - timing:
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+        then:
+          - button.press: btn_restart
       
 light:
   - platform: binary
