@@ -4,7 +4,10 @@ light:
     output: shelly_relay
     id: lightid
 
-<< !include: output.yaml
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: shelly_relay
 
 binary_sensor:
   - platform: gpio
