@@ -1,0 +1,16 @@
+binary_sensor:
+  - platform: gpio
+    id: input_2
+    pin:
+      number: GPIO5
+    name: "${channel_2} input"
+    on_multi_click:
+      - timing:
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+        then:
+          - button.press: btn_restart
