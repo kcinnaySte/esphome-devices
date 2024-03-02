@@ -16,13 +16,6 @@ uart:
 sml:
   id: mysml
   uart_id: uart_bus
-  #on_data:
-  #  - lambda: !lambda |-
-  #      if (valid) {
-  #        id(mqttclient).publish("gridmeter/sensor/sml/state", format_hex(bytes));
-  #      } else {
-  #        id(mqttclient).publish("gridmeter/sensor/sml/error", format_hex(bytes));
-  #      }
 
 sensor:
   - platform: sml
