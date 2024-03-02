@@ -1,10 +1,9 @@
-# Example configuration entry
 esp8266:
   board: nodemcuv2
   framework:
     version: recommended
 
-# Example configuration entry
+
 uart:
   id: uart_bus
   rx_pin: D5
